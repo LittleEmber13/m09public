@@ -1,0 +1,64 @@
+package duran.exercicistreams6;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+/**
+ * Program to copy a binary file
+ *
+ * @author dadu5598
+ */
+public class DuranExerciciStreams6 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        byte[] bytes = readFile("image.png");
+        writeFile(bytes,"copy.png");
+    }
+
+    /**
+     * Reads all bytes from a file
+     * @param fileName
+     * @return byte[] or null
+     */
+    private static byte[] readFile(String fileName) {
+
+        byte[] bytes = null;
+        FileInputStream fileInputStream;
+
+        try {
+            fileInputStream = new FileInputStream(fileName);
+
+            bytes = fileInputStream.readAllBytes();
+
+            fileInputStream.close();
+        } catch (FileNotFoundException fnfe) {
+            System.err.println("File not found");
+        } catch (IOException ioe) {
+            System.err.println("IOException");
+        }
+        return bytes;
+    }
+
+    /**
+     * Writtes a file
+     * @param bytes
+     * @param fileName 
+     */
+    private static void writeFile(byte[] bytes, String fileName) {
+        try { 
+            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+            fileOutputStream.write(bytes);
+            fileOutputStream.close();
+        } catch (FileNotFoundException fnfe) {
+            System.err.println("File not found");
+        } catch  (IOException ioe) {
+            System.err.println("IOException");
+        }
+    }
+
+}
